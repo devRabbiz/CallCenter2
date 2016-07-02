@@ -3,7 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallCenter.Model", "CallCenter.Model\CallCenter.Model.csproj", "{29CDE4E4-B5E7-49CD-8014-1BCAF3709CEA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallCenter.Data", "CallCenter.Data\CallCenter.Data.csproj", "{23A15753-9F56-417D-AA3B-73D5EA3146CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallCenter.Test", "CallCenter.Test\CallCenter.Test.csproj", "{1D5F63C4-4C33-4512-9B07-0A7262153A6C}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29CDE4E4-B5E7-49CD-8014-1BCAF3709CEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29CDE4E4-B5E7-49CD-8014-1BCAF3709CEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29CDE4E4-B5E7-49CD-8014-1BCAF3709CEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29CDE4E4-B5E7-49CD-8014-1BCAF3709CEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23A15753-9F56-417D-AA3B-73D5EA3146CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23A15753-9F56-417D-AA3B-73D5EA3146CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23A15753-9F56-417D-AA3B-73D5EA3146CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23A15753-9F56-417D-AA3B-73D5EA3146CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D5F63C4-4C33-4512-9B07-0A7262153A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D5F63C4-4C33-4512-9B07-0A7262153A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D5F63C4-4C33-4512-9B07-0A7262153A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D5F63C4-4C33-4512-9B07-0A7262153A6C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
