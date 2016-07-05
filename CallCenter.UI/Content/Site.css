@@ -1,0 +1,20 @@
+﻿body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: aliceblue;
+}
+span { font-style: italic; }
+.page-header {
+    background-color: #a3c754;
+    color: #07094d;
+}
+thead { background-color: #d7c055; }
+tbody { background-color: #f2edb7; }
+#tableUsersList tbody tr { cursor:pointer; }
+#userDetailForm { background-color: #f2edb7; }
+#tableUserDetail tr td:first-child { 
+    width: 170px;
+    color: darkblue;    
+}
+.table-info { background-color: #d99c09; }
+.btn-toolbar { margin-top: 10px; }
+#crCallReport { height: 120px; }
