@@ -55,6 +55,9 @@
     <Compile Include="Entities\Call.cs" />
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\PersonsFilters.cs" />
+    <Compile Include="Services\DTO\CallDetails.cs" />
+    <Compile Include="Services\DTO\PersonDetails.cs" />
+    <Compile Include="Services\DTO\PersonsListItem.cs" />
     <Compile Include="Services\Filter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
