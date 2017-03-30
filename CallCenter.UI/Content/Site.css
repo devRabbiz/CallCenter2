@@ -9,7 +9,6 @@ span { font-style: italic; }
 }
 thead { background-color: #d7c055; }
 tbody { background-color: #f2edb7; }
-#tableUsersList tbody tr { cursor:pointer; }
 #userDetailForm { background-color: #f2edb7; }
 #tableUserDetail tr td:first-child { 
     width: 170px;
@@ -18,3 +17,7 @@ tbody { background-color: #f2edb7; }
 .table-info { background-color: #d99c09; }
 .btn-toolbar { margin-top: 10px; }
 #crCallReport { height: 120px; }
+
+#tableUsersList tbody tr td:last-child{
+    width: 250px;
+}
