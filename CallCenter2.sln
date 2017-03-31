@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallCenter.Test", "CallCent
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallCenter.UI", "CallCenter.UI\CallCenter.UI.csproj", "{6596CF39-168F-41B0-8370-AA82A75A13FB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallCenter.UI.Tests", "CallCenter.UI.Tests\CallCenter.UI.Tests.csproj", "{2521E213-D21B-4B8C-99E2-EB5DACE45243}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallCenter.RestService", "CallCenter.RestService\CallCenter.RestService.csproj", "{94543DCC-95CB-4F90-9862-7BAB2798D578}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{6596CF39-168F-41B0-8370-AA82A75A13FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6596CF39-168F-41B0-8370-AA82A75A13FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6596CF39-168F-41B0-8370-AA82A75A13FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2521E213-D21B-4B8C-99E2-EB5DACE45243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2521E213-D21B-4B8C-99E2-EB5DACE45243}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2521E213-D21B-4B8C-99E2-EB5DACE45243}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2521E213-D21B-4B8C-99E2-EB5DACE45243}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94543DCC-95CB-4F90-9862-7BAB2798D578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94543DCC-95CB-4F90-9862-7BAB2798D578}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94543DCC-95CB-4F90-9862-7BAB2798D578}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94543DCC-95CB-4F90-9862-7BAB2798D578}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
