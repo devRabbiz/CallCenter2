@@ -1,6 +1,5 @@
 ﻿using CallCenter.Data;
 using CallCenter.Model.Abstract;
-using CallCenter.Model.Services;
 using Ninject;
 using System;
 using System.Collections.Generic;
@@ -28,8 +27,8 @@ namespace CallCenter.UI.App_Start
         }
         private void AddBindings()
         {
-            kernel.Bind<ICallCenterStorage>().To<CallCenterStorage>().WithConstructorArgument("CallCenterDB");
-            kernel.Bind<ICallCenterService>().To<CallCenterService>();
+            kernel.Bind<ICallCenterStorage>().To<CallCenterStorage>();
+            kernel.Bind<ICallCenterStorage>().To<CallCenterStorage>();
         }
     }
 }

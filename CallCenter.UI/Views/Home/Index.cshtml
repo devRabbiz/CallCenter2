@@ -1,153 +1,230 @@
-﻿@model CallCenter.UI.ViewModels.IndexFilterViewModel
+﻿
+@{
+    ViewBag.Title = "Index";
+}
 
 <div id="container" class='container-fluid'>
-
-    <div class="page-header col-lg-10 col-lg-offset-1 green"> <h2 class="center-block">Клиенты фирмы</h2>  <a class="text-right" href="~/ApiPage/Index">Интерфейс на WebApi</a></div>
+    
+    <div class="page-header col-lg-10 col-lg-offset-1 green"> <h2 class="center-block">Клиенты фирмы</h2></div>
 
     <div id="pageContainer" class="green">
-
         <div class="col-lg-10 col-lg-offset-1">
-            @using (Html.BeginForm(actionName: "Index", controllerName: "Home", method: FormMethod.Get, htmlAttributes: new { name = "personsListForm" })) {
-                <fieldset title = "Фильтрация" class="form-group row">
-                    <div class="col-xs-3">
-                        <label for="NameFilter" class="small">Фамилия, имя или отчество:</label>
-                        <input type="text" class="form-control" id="NameFilter" name="NameFilter" placeholder="ФИО" value="@Model.NameFilter" />
-                    </div>
-                    <div class="col-xs-2">
-                        <label for="GenderFilter" class="small">Пол:</label>
-                        <select id="GenderFilter" name="GenderFilter" class="form-control">
-                            <option value="0"
-                                @if (Model.GenderFilter == 0) {
-                                    @:selected='selected'
-                                }
-                                >Все</option>
-                            <option value="1" 
-                                @if (Model.GenderFilter == 1) {
-                                     @:selected='selected'
-                                }
-                                >М</option>
-                            <option value="2" 
-                                @if (Model.GenderFilter == 2) {
-                                    @:selected='selected'
-                                }
-                                >Ж</option>
-                        </select>
-                    </div>
-                    <div class="col-xs-2">
-                        <label for="AgeMin" class="small">Мин. возраст:</label>
-                        <input type="number" class="form-control" id="AgeMin" name="AgeMin" title="Минимальный возраст" value="@Model.AgeMin" />
-                    </div>
-                    <div class="col-xs-2">
-                        <label for="AgeMax" class="small">Макс. возраст:</label>
-                        <input type="number" class="form-control" id="AgeMax" name="AgeMax" title="Максимальный возраст" value="@Model.AgeMax" />
-                    </div>
-                    <div class="col-xs-2">
-                        <label for="MinDaysAfterLastCall" class="small">Пред. зв. (дней):</label>
-                        <input type="number" class="form-control" id="MinDaysAfterLastCall" name="MinDaysAfterLastCall" title="Не менее дней после последнего звонка" value="@Model.MinDaysAfterLastCall" />
-                    </div>
-                    <div class="col-xs-1">
-                        <input type="submit" class="btn btn-default" value="Поиск" />
-                    </div>
-
-                    <input type="hidden" id="PageSize" name="PageSize" value="@Model.PageSize" />
-                    <input type="hidden" id="PageNo" name="PageNo" value="@Model.PageNo" />                    
-                </fieldset>
-            }
-            @{int pagesCount = (int)Math.Ceiling((double)Model.RecordsCount / Model.PageSize);}
-            <input type="hidden" id="PagesCount" name="PagesCount" value="@pagesCount" />            
-            <input type="hidden" id="RecordsCount" name="RecordsCount" value="@Model.RecordsCount" />
+            <fieldset title="Фильтрация" class="form-group row">
+                <div class="col-xs-3">
+                    <label for="nameFilter" class="small">Фамилия, имя или отчество:</label>
+                    <input type="text" class="form-control" id="nameFilter" placeholder="ФИО" />
+                </div>
+                <div class="col-xs-2">
+                    <label for="gender" class="small">Пол:</label>
+                    <select id="gender" class="form-control">
+                        <option value="0" selected="selected">Все</option>
+                        <option value="1">М</option>
+                        <option value="2">Ж</option>
+                    </select>
+                </div>
+                <div class="col-xs-2">
+                    <label for="minAge" class="small">Мин. возраст:</label>
+                    <input type="number" class="form-control" id="minAge" title="Минимальный возраст" value="0" />
+                </div>
+                <div class="col-xs-2">
+                    <label for="maxAge" class="small">Макс. возраст:</label>
+                    <input type="number" class="form-control" id="maxAge" title="Максимальный возраст" value="0" />
+                </div>
+                <div class="col-xs-2">
+                    <label for="minDaysAfterLastCall" class="small">Пред. зв. (дней):</label>
+                    <input type="number" class="form-control" id="minDaysAfterLastCall" title="Не менее дней после последнего звонка" value="0" />
+                </div>
+                <div class="col-xs-1">
+                    <input type="button" class="btn btn-default" value="Поиск" onclick="onFilter();" />
+                </div>
+            </fieldset>
         </div>
-
-        <div class='col-lg-10 col-lg-offset-1'>
-            <table class="table table-striped" id="tableUsersList">
+        
+        <div class='col-lg-5 col-lg-offset-1'>
+            <table class="table table-hover" id="tableUsersList">
                 <thead>
                     <tr>
                         <th>Фамилия</th>
                         <th>Имя</th>
                         <th>Отчество</th>
-                        <th></th>                        
                     </tr>
                 </thead>
-                <tbody>
-
-                   @foreach (var persItem in ViewBag.PersonsList)
-                   {
-                       <tr>
-                           <td>@persItem.LastName</td>
-                           <td>@persItem.FirstName</td>
-                           <td>@persItem.Patronymic</td>
-                           <td>
-                           <a href="#">Детали</a> | 
-                           <a href="#">Редактировать</a> |
-                           <a href="#">Удалить</a>
-                           </td>
-                       </tr>
-                   }
-
-                </tbody>
+                <tbody></tbody>
             </table>
 
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editPerson" onclick="addPersonClick();">
                 Добавить
             </button>
 
+            <div class="modal fade" id="editPerson" tabindex="-1" role="dialog"
+                 aria-labelledby="createDialogHeader" aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="createDialogHeader">Редактирование данных клиента</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <input type="hidden" id="currentPersonId" value="" />
+                            <fieldset>
+                                <label for="cName">Имя* <small>(от 3 до 30 символов)</small></label>
+                                <input type="text" class="form-control" id="cName" />
+                                <label for="cSurname">Фамилия <small>(до 30 символов)</small></label>
+                                <input type="text" class="form-control" id="cSurname" />
+                                <label for="cPatronymic">Отчество <small>(до 30 символов)</small></label>
+                                <input type="text" class="form-control" id="cPatronymic" />
+                                <label for="cBirthDate">Дата рождения <small>(гггг-мм-дд)</small></label>
+                                <input type="date" class="form-control" id="cBirthDate" />
+                                <label for="cGender">Пол</label>
+                                <select class="form-control" id="cGender">
+                                    <option value="0">Не выбрано</option>
+                                    <option value="1">Мужской</option>
+                                    <option value="2">Женский</option>
+                                </select>
+                                <label for="cPhoneNumber">Номер телефона* <small>от 5 до 20 символов</small></label>
+                                <input type="text" id="cPhoneNumber" class="form-control" />
+
+                                <label class="label label-danger" id="cValidation">Некорректный ввод</label>
+                                <label class="label label-success" id="cMessage">Запись сохранена</label>
+                            </fieldset>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                            <button type="button" class="btn btn-primary" onclick="save();">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <nav>
                 <ul class="pager">
-                    <li class="pager-prev"><button onclick="prevPage();">&lt;</button></li>                    
-                    <li id="pageLabel">[@Model.PageNo из @pagesCount ]</li>
+                    <li class="pager-prev"><button onclick="prevPage();">&lt;</button></li>
+                    <li id="pageLabel">[1 из 2]</li>
                     <li>
                         Записей на страницу:
-                        <select id="iPerPage" onchange="itemsPerPageSelect();">
-                            @{ 
-                                int[] arr = new int[] { 30, 25, 20, 15, 10 };
-                            }
-                            @foreach (int i in arr)
-                            {
-                                if (i == Model.PageSize)
-                                {
-                                    <option value="@i" selected="selected">@i</option>
-                                }
-                                else
-                                {
-                                    <option value="@i">@i</option>
-                                }
-                            }                            
+                        <select id="iPerPage">
+                            <option value="30">30</option>
+                            <option value="25" selected="selected">25</option>
+                            <option value="20">20</option>
+                            <option value="15">15</option>
+                            <option value="10">10</option>
                         </select>
                     </li>
                     <li class="pager-next"><button onclick="nextPage();">&gt;</button></li>
                 </ul>
             </nav>
+
+
         </div>
-        
+
+        <div class='col-lg-5'>
+            <div id="userDetailForm" class="panel panel-default">
+                <div class="panel-heading">
+                    Инфрмация о пользователе
+                </div>
+                <div class="panel-body">
+                    <table id="tableUserDetail">
+                        <tr>
+                            <td><b>Фамилия:</b></td>
+                            <td id="detSurname"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Имя:</b></td>
+                            <td id="detName"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Отчество:</b></td>
+                            <td id="detPatronymic"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Дата рожденья:</b></td>
+                            <td id="detBirthDate"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Пол:</b></td>
+                            <td id="detGender"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Телефон:</b></td>
+                            <td id="detPhone"></td>
+                        </tr>
+                    </table>
+                    <div class="btn-toolbar">
+                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editPerson" onclick="editPersonClick();">
+                            Редактировать
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" onclick="deletePersonClick();">Удалить</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    История звонков
+                </div>
+                <table id="tableCallsHistory" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Дата</th>
+                            <th>Отчет</th>
+                            <th>Стоимость заказа</th>
+                            <th colspan="2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editCall" onclick="addCallClick();">Добавить отчет</button>
+            </div>
+
+            <div class="modal fade" id="editCall" tabindex="-1" role="dialog"
+                 aria-labelledby="createDialogHeader" aria-hidden="true">
+                <div class="modal-dialog modal-sm" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title">Редактирование отчета</h4>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" id="currentCallId" value="" />
+                            <fieldset>
+                                <label for="crCallDate">Дата звонка* <small>(гггг-мм-дд)</small></label>
+                                <input type="date" id="crCallDate" class="form-control" />
+                                <label for="crCallReport">Отчет* <small>от 5 до 500 символов</small></label>
+                                <textarea id="crCallReport" cols="5" class="form-control"></textarea>
+                                <label for="crOrderCost">Цена заказа</label>
+                                <input type="number" class="form-control" id="crOrderCost" value="0.0" />
+                                <label class="label label-danger" id="crValidation">Некорректный ввод</label>
+                                <label class="label label-success" id="crMessage">Запись сохранена</label>
+                            </fieldset>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                            <button type="button" class="btn btn-primary" onclick="saveCall()">Сохранить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
+            
+
 </div>
-
-@section scripts{
-<script>
-    function itemsPerPageSelect() {
-        $('#PageSize').val($('#iPerPage option:selected').text());
-        $('#PageNo').val(1);
-        document.forms['personsListForm'].submit();
-    };
-
-    function prevPage(){
-        let pageNo = parseInt($('#PageNo').val());
-        if (pageNo > 1) {
-            $('#PageNo').val(pageNo - 1);
-            document.forms['personsListForm'].submit();
-        }
-    };
-
-    function nextPage(){
-        let pageNo = parseInt($('#PageNo').val());
-        let pagesCount = parseInt($('#PagesCount').val());
-        if (pageNo < pagesCount) {
-            $('#PageNo').val(pageNo + 1);
-            document.forms['personsListForm'].submit();
-        }
-    };
-</script>    
-}
-
-
 
